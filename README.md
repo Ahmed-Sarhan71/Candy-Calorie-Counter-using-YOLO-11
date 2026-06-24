@@ -29,8 +29,7 @@ This project provides two scripts:
 | `candy_calorie_counter.py` | Candy-specific detection and nutrition tallying |
 | `yolo_detect.py` | General-purpose YOLO detection script |
 | `my_model.pt` | Custom YOLO model weights |
-| `IMG_2784.MOV` | Sample demo video |
-| `train_batch0.jpg` | Sample training batch visualization |
+| `val_batch0_pred.jpg` | Validation Results |
 | `Training The Model.ipynb` | Google Colab notebook for training the YOLO model |
 
 ## Model Training
