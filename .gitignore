@@ -1,0 +1,25 @@
+# Model weights
+*.pt
+
+# Recorded videos
+*.avi
+*.mp4
+*.mov
+*.MOV
+
+# Captures
+capture.png
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment
+venv/
+.env
+
+# Dataset folders
+data/
