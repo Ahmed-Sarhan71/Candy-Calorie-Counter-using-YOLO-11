@@ -8,9 +8,9 @@ A computer vision application that uses a custom YOLO11s model to detect candies
 
 This project provides three ways to use the model:
 
-- **`app.py`** — Streamlit web app. Upload a photo or pick a sample image to detect candies and see calories/sugar instantly. [Try it live](https://candy-calorie-counter-using-yolo-11.streamlit.app).
-- **`candy_calorie_counter.py`** — Real-time detection from a USB camera or video file with live calorie/sugar tallying.
-- **`yolo_detect.py`** — General-purpose YOLO inference script supporting images, folders, videos, USB cameras, and Raspberry Pi cameras.
+- **`app/app.py`** — Streamlit web app. Upload a photo or pick a sample image to detect candies and see calories/sugar instantly. [Try it live](https://candy-calorie-counter-using-yolo-11.streamlit.app).
+- **`scripts/candy_calorie_counter.py`** — Real-time detection from a USB camera or video file with live calorie/sugar tallying.
+- **`scripts/yolo_detect.py`** — General-purpose YOLO inference script supporting images, folders, videos, USB cameras, and Raspberry Pi cameras.
 
 ## Video Tutorial
 
@@ -27,17 +27,40 @@ This project provides three ways to use the model:
 
 ## Files
 
-| File | Description |
-|------|-------------|
-| `app.py` | Streamlit web app for image-based candy detection |
-| `candy_calorie_counter.py` | Real-time candy detection and nutrition tallying |
-| `yolo_detect.py` | General-purpose YOLO detection script |
-| `my_model.pt` | Custom YOLO model weights |
-| `Training The Model.ipynb` | Google Colab notebook for training the YOLO model |
+| File / Directory | Description |
+|------------------|-------------|
+| `app/app.py` | Streamlit web app for image-based candy detection |
+| `scripts/candy_calorie_counter.py` | Real-time candy detection and nutrition tallying |
+| `scripts/yolo_detect.py` | General-purpose YOLO detection script |
+| `model/my_model.pt` | Custom YOLO model weights |
+| `docs/Training The Model.ipynb` | Google Colab notebook for training the YOLO model |
+| `samples/images for testing/` | Sample test images |
+| `samples/val_batch0_pred.jpg` | Validation results visualization |
 | `requirements.txt` | Python dependencies |
 | `LICENSE` | MIT License |
-| `images for testing/` | Sample test images |
-| `val_batch0_pred.jpg` | Validation results visualization |
+
+## Project Structure
+
+```
+Candy Calorie/
+├── app/
+│   └── app.py                    # Streamlit web app
+├── scripts/
+│   ├── candy_calorie_counter.py  # Real-time detection + nutrition tally
+│   └── yolo_detect.py            # General-purpose YOLO inference
+├── model/
+│   └── my_model.pt               # Trained YOLO11s weights
+├── samples/
+│   ├── images for testing/       # 5 sample test images
+│   ├── IMG_2784.MOV              # Demo video
+│   └── val_batch0_pred.jpg       # Validation results visualization
+├── docs/
+│   └── Training The Model.ipynb  # Google Colab training notebook
+├── .gitignore
+├── LICENSE
+├── README.md
+└── requirements.txt
+```
 
 ## Deployment
 
@@ -68,7 +91,7 @@ To train your own model, open the notebook in Google Colab and follow the steps.
 
 Despite only having 9 validation images (from a 85-image dataset), the model achieved ~0.995 mAP50 with near-perfect precision and recall across all classes.
 
-![Validation results](val_batch0_pred.jpg)
+![Validation results](samples/val_batch0_pred.jpg)
 
 The trained model can also be deployed on edge devices like Raspberry Pi and other single-board computers. Ultralytics YOLO supports exporting to various formats (TensorFlow Lite, ONNX, CoreML, etc.) for different hardware — converting the model format is straightforward but not covered in this guide.
 
@@ -77,18 +100,18 @@ The trained model can also be deployed on edge devices like Raspberry Pi and oth
 ### Streamlit Web App
 
 ```bash
-streamlit run app.py
+streamlit run app/app.py
 ```
 
 ### Candy Calorie Counter
 
 ```bash
-python candy_calorie_counter.py
+python scripts/candy_calorie_counter.py
 ```
 
 **Configuration** — Edit the top of `candy_calorie_counter.py` to change:
 - `cam_index` — Set to `0` for USB camera, or a video file path like `"IMG_2784.MOV"` in quotes
-- `model_path` — Path to the YOLO model (default: `my_model.pt`)
+- `model_path` — Path to the YOLO model (default: `model/my_model.pt`)
 - `min_thresh` — Confidence threshold (default: `0.50`)
 - `record` — Set to `True` to save output as `demo1.avi`
 - `nutrition_info` — Dictionary of `{'candy_name': [calories, sugar_g]}` to customize candy types and nutritional values
@@ -101,7 +124,7 @@ Key bindings while running:
 ### General YOLO Detection
 
 ```bash
-python yolo_detect.py --model my_model.pt --source usb0 --thresh 0.5 --resolution 1280x720
+python scripts/yolo_detect.py --model model/my_model.pt --source usb0 --thresh 0.5 --resolution 1280x720
 ```
 
 Arguments:
@@ -115,8 +138,8 @@ Arguments:
 
 | Candy | Calories | Sugar (g) |
 |-------|----------|-----------|
-| Twinkies (TuC) | 146 | 1.2 |
-| Ho Hos | 380 | 8 |
-| Borio | 250 | 10 |
+| TuC | 146 | 2.2 |
+| HoHos | 259 | 24 |
+| Borio | 170 | 13 |
 | McVities | 220 | 18 |
-| Biskrem | 120 | 18 |
+| Biskrem | 171 | 12 |

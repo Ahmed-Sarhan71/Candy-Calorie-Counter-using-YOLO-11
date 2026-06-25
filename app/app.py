@@ -12,9 +12,9 @@ st.markdown("""
 Upload a photo of your candies and this app will detect them, count them, and tally up total calories and sugar.
 """)
 
-nutrition_info = {'TuC': [146, 1.2], 'HoHos': [380, 8], 'Borio': [250, 10], 'McVities': [220, 18], 'Biskrem': [120, 18]}
+nutrition_info = {'TuC': [146, 2.2], 'HoHos': [259, 24], 'Borio': [170, 13], 'McVities': [220, 18], 'Biskrem': [171, 12]}
 
-model_path = "my_model.pt"
+model_path = "model/my_model.pt"
 if not os.path.exists(model_path):
     st.error(f"Model not found at {model_path}")
     st.stop()
@@ -23,7 +23,7 @@ with st.spinner("Loading model..."):
     model = YOLO(model_path, task='detect')
 labels = model.names
 
-img_dir = "images for testing"
+img_dir = "samples/images for testing"
 os.makedirs(img_dir, exist_ok=True)
 sample_images = [os.path.join(img_dir, f) for f in os.listdir(img_dir) if f.upper().endswith(('.JPG', '.JPEG', '.PNG'))]
 sample_images.sort()

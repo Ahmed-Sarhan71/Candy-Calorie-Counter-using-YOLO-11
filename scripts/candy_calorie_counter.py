@@ -12,15 +12,15 @@ import cv2
 from ultralytics import YOLO
 
 # Define path to model and other user variables
-model_path = 'my_model.pt'  # Path to model
+model_path = 'model/my_model.pt'  # Path to model
 min_thresh = 0.50                      # Minimum detection threshold
 cam_index = 0                          # Index of USB camera
 imgW, imgH = 1280, 720                 # Resolution to run USB camera at
 record = False                         # Record result video
 
 # Create dictionary to hold info about candy calories and sugar. Each entry is stored as {'candy_type': [calories, grams sugar]}
-# These were taken from the Costco candy packaging: https://www.costco.com/.product.100333887.html and https://www.costco.com/.product.100688986.html
-nutrition_info = {'TuC': [146, 1.2], 'HoHos': [380, 8], 'Borio': [250, 10],  'McVities': [220, 18], 'Biskrem': [120, 18]}
+# Values estimated from Egyptian-market product packaging
+nutrition_info = {'TuC': [146, 2.2], 'HoHos': [259, 24], 'Borio': [170, 13], 'McVities': [220, 18], 'Biskrem': [171, 12]}
 
 # Check if model file exists and is valid
 if (not os.path.exists(model_path)):
