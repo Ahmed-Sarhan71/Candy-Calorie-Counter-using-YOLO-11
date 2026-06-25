@@ -1,36 +1,47 @@
 # Candy Calorie Counter
 
-A computer vision application that uses a custom YOLO11s model to detect candies from a USB camera or video file and tally total calories and sugar content.
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://candy-calorie-counter-using-yolo-11.streamlit.app)
+
+A computer vision application that uses a custom YOLO11s model to detect candies from images, USB cameras, or video files and tally total calories and sugar content.
 
 ## Overview
 
-This project provides two scripts:
+This project provides three ways to use the model:
 
-- **`candy_calorie_counter.py`** — Detects specific candies (Twinkies, Ho Hos, Borio, McVities, Biskrem) from a USB camera or video file, counts them, and calculates total calories and sugar based on nutritional info from the candy packaging.
-
-- **`yolo_detect.py`** — A general-purpose YOLO inference script that supports images, image folders, videos, USB cameras, and Raspberry Pi cameras. Displays FPS, object count, and detection boxes.
-
-## Requirements
-
-- Python 3.8+
-- [Ultralytics YOLO](https://github.com/ultralytics/ultralytics)
-- OpenCV (`opencv-python`)
-- NumPy
-- A custom-trained YOLO model (e.g., `my_model.pt`)
+- **`app.py`** — Streamlit web app. Upload a photo or pick a sample image to detect candies and see calories/sugar instantly. [Try it live](https://candy-calorie-counter-using-yolo-11.streamlit.app).
+- **`candy_calorie_counter.py`** — Real-time detection from a USB camera or video file with live calorie/sugar tallying.
+- **`yolo_detect.py`** — General-purpose YOLO inference script supporting images, folders, videos, USB cameras, and Raspberry Pi cameras.
 
 ## Video Tutorial
 
 [![Candy Calorie Counter Tutorial](https://img.youtube.com/vi/ydU6nrFXrsw/0.jpg)](https://www.youtube.com/watch?v=ydU6nrFXrsw)
 
+## Requirements
+
+- Python 3.8+
+- [Ultralytics YOLO](https://github.com/ultralytics/ultralytics)
+- OpenCV (`opencv-python-headless` for cloud, `opencv-python` for local)
+- NumPy
+- Streamlit
+- A custom-trained YOLO model (e.g., `my_model.pt`)
+
 ## Files
 
 | File | Description |
 |------|-------------|
-| `candy_calorie_counter.py` | Candy-specific detection and nutrition tallying |
+| `app.py` | Streamlit web app for image-based candy detection |
+| `candy_calorie_counter.py` | Real-time candy detection and nutrition tallying |
 | `yolo_detect.py` | General-purpose YOLO detection script |
 | `my_model.pt` | Custom YOLO model weights |
-| `val_batch0_pred.jpg` | Validation Results |
 | `Training The Model.ipynb` | Google Colab notebook for training the YOLO model |
+| `requirements.txt` | Python dependencies |
+| `LICENSE` | MIT License |
+| `images for testing/` | Sample test images |
+| `val_batch0_pred.jpg` | Validation results visualization |
+
+## Deployment
+
+The Streamlit app is deployed on [Streamlit Community Cloud](https://share.streamlit.io) — push to GitHub, connect your repo, and it deploys automatically. The app runs fully in the browser; inference happens on the cloud server.
 
 ## Model Training
 
@@ -62,6 +73,12 @@ Despite only having 9 validation images (from a 85-image dataset), the model ach
 The trained model can also be deployed on edge devices like Raspberry Pi and other single-board computers. Ultralytics YOLO supports exporting to various formats (TensorFlow Lite, ONNX, CoreML, etc.) for different hardware — converting the model format is straightforward but not covered in this guide.
 
 ## Usage
+
+### Streamlit Web App
+
+```bash
+streamlit run app.py
+```
 
 ### Candy Calorie Counter
 
@@ -103,5 +120,3 @@ Arguments:
 | Borio | 250 | 10 |
 | McVities | 220 | 18 |
 | Biskrem | 120 | 18 |
-
-
