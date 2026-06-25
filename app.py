@@ -55,9 +55,9 @@ for i in range(len(detections)):
     if conf > 0.5:
         cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (0, 255, 0), 3)
         label = f'{classname}: {int(conf*100)}%'
-        (tw, th), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 1.4, 3)
-        cv2.rectangle(frame, (xmin, ymin - th - 12), (xmin + tw + 12, ymin), (0, 255, 0), -1)
-        cv2.putText(frame, label, (xmin + 6, ymin - 6), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 0, 0), 3)
+        (tw, th), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 2.5, 5)
+        cv2.rectangle(frame, (xmin, ymin - th - 20), (xmin + tw + 20, ymin), (0, 255, 0), -1)
+        cv2.putText(frame, label, (xmin + 10, ymin - 10), cv2.FONT_HERSHEY_SIMPLEX, 2.5, (0, 0, 0), 5)
         candies_detected.append(classname)
 
 total_calories = 0
